@@ -4,8 +4,7 @@ import 'package:pokeapp/Pokemon.dart';
 import 'dart:convert';
 import 'package:pokeapp/pokedetails.dart';
 
-void main() =>
-    runApp(
+void main() => runApp(
       MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(primarySwatch: Colors.red),
@@ -14,14 +13,13 @@ void main() =>
     );
 
 class HomePage extends StatefulWidget {
-
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-
-  String BaseURL = "https://raw.githubusercontent.com/Biuni/PokemonGO-Pokedex/master/pokedex.json";
+  String BaseURL =
+      "https://raw.githubusercontent.com/Biuni/PokemonGO-Pokedex/master/pokedex.json";
   PokeHub pokeHub;
 
   @override
@@ -35,9 +33,7 @@ class _HomePageState extends State<HomePage> {
     var DecodedValue = jsonDecode(res.body);
     pokeHub = PokeHub.fromJson(DecodedValue);
     print(pokeHub);
-    setState(() {
-
-    });
+    setState(() {});
   }
 
   @override
@@ -52,16 +48,19 @@ class _HomePageState extends State<HomePage> {
           ? Center(child: CircularProgressIndicator())
           : GridView.count(
         crossAxisCount: 2, //used conditional statements
-        children: pokeHub.pokemon.map((Pokemon poke) =>
+        children: pokeHub.pokemon
+            .map((Pokemon poke) =>
             Padding(
               padding: const EdgeInsets.all(5.0),
               child: InkWell(
                 onTap: () {
                   Navigator.push(
-                      context, MaterialPageRoute(builder: (context) =>
-                      PokeDetails(
-                        pokemon: poke,
-                      )));
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              PokeDetails(
+                                pokemon: poke,
+                              )));
                 },
                 child: Card(
                   elevation: 5.0,
@@ -75,23 +74,21 @@ class _HomePageState extends State<HomePage> {
                           width: 100,
                           decoration: BoxDecoration(
                               image: DecorationImage(
-                                  image: NetworkImage(
-                                      poke.img
-                                  )
-                              )
-                          ),
+                                  image: NetworkImage(poke.img))),
                         ),
                       ),
-                      Text(poke.name,
+                      Text(
+                        poke.name,
                         style: TextStyle(
                             fontSize: 15.0,
-                            fontWeight: FontWeight.bold
-                        ),)
+                            fontWeight: FontWeight.bold),
+                      )
                     ],
                   ),
                 ),
               ),
-            )).toList(),
+            ))
+            .toList(),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
